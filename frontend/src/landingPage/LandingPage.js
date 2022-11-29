@@ -6,7 +6,8 @@ const LandingPage = () => {
   return (
     <>
       <Heroes />
-      {/* <Hero /> */}
+      {/* <Hero />
+       */}
     </>
   );
 };
