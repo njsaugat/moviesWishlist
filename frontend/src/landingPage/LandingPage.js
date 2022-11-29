@@ -1,10 +1,12 @@
 import React from 'react';
 import Hero from './Hero';
+import Heroes from './Heroes';
 
 const LandingPage = () => {
   return (
     <>
-      <Hero />
+      <Heroes />
+      {/* <Hero /> */}
     </>
   );
 };
