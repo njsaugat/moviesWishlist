@@ -7,7 +7,7 @@ import './style.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter className>
       <Routes>
         <Route path="/" element={<LandingPage />} />;
         {/* <Route path="/" element={<ShowMovies />} />; */}
