@@ -4,5 +4,9 @@ module.exports = {
   theme: {
     extend: {},
   },
+  fontFamily: {
+    poppins: ['"Rokkit"'],
+    inter: ['"Inter"'],
+  },
   plugins: [],
 };
