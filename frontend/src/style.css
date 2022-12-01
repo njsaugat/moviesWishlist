@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 * {
   box-sizing: border-box;
 }
@@ -9,7 +9,7 @@
 
 body {
   min-height: 100vh;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
   /* background-image: linear-gradient(45deg, rgb(23, 23, 212), rgb(234, 44, 234)); */
   width: 100vw;
@@ -17,16 +17,6 @@ body {
   /* background: #141e30;  */
   /* fallback for old browsers */
 }
-/* .container {
-  opacity: 0.8;
-  background-color: #ccc;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  z-index: 1000;
-} */
 
 .search-bar {
   border-bottom: 2px solid black;
@@ -109,6 +99,10 @@ body {
 }
 
 .content {
+  /* border-radius: 39px;
+  background: linear-gradient(145deg, #2e3b4d, #37465b);
+  background: linear-gradient(180deg, #0f172a, #334155); */
+  /* box-shadow: 18px 18px 36px #161c25, -18px -18px 36px #506685; */
   transform: translateX(500%);
   transition: transform 0.7s ease-in-out;
 }
@@ -119,28 +113,47 @@ body {
   transform: translateX(0);
 }
 
-.custom-shape-divider-bottom-1669720364 svg {
+.custom-shape-divider-top-1669726171 {
+  position: relative;
+  top: 102px;
+  /* make the top same as above stuff */
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 100;
+}
+
+.custom-shape-divider-top-1669726171 svg {
   /* position: relative; */
   display: block;
   width: calc(100% + 1.3px);
   height: 102px;
   transform: rotateY(180deg);
 }
-.custom-shape-divider-bottom-1669720364 {
-  position: relative;
-  top: 0px;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  transform: rotate(180deg);
-}
 
-#header-shape-gradient {
-  --color-stop: rgb(51 65 85);
-  --color-bot: rgb(15 23 42);
+.custom-shape-divider-top-1669726171 .shape-fill {
+  fill: #ffffff;
 }
-.custom-shape-divider-bottom-1669720364 .shape-fill {
-  /* fill: #000000; */
-  fill: url(#blue-gradient);
+/* .gradientSVG {
+  background: linear-gradient(
+    180deg,
+    rgba(94, 189, 62, 1) 34%,
+    rgba(255, 185, 0, 1),
+    rgba(247, 130, 0, 1),
+    rgba(226, 56, 56, 1),
+    rgba(151, 57, 153, 1),
+    rgba(0, 156, 223, 1) 91%
+  );
+} */
+
+#portal {
+  opacity: 0;
+  transition: 0.5s ease-in-out;
+}
+#portal.active {
+  opacity: 1;
+}
+body {
+  overflow-x: hidden;
 }
