@@ -157,3 +157,63 @@ body {
 body {
   overflow-x: hidden;
 }
+
+.container-movies {
+  overscroll-behavior-inline: contain;
+  /* width: 100vw;
+  position: relative; */
+  /* left: calc(-50vw + 50%); */
+  /* left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw; */
+  /* display: grid;
+  grid-template-columns: calc((100vw - 50vh) / 2) 50vh calc(
+      100% - (50vh + 100vw) / 2
+    ); */
+}
+
+.container-movies::-webkit-scrollbar {
+  /* scrollbar-width: thin; */
+  /* width: 0.1rem; */
+  width: 50%;
+  height: 0.5rem;
+}
+.container-movies::-webkit-scrollbar-track {
+  /* scrollbar-width: thin; */
+  background: transparent;
+}
+.container-movies::-webkit-scrollbar-thumb {
+  scrollbar-width: thin;
+  /* scrollbar-width: ; */
+  /* width: 2rem; */
+  background: linear-gradient(45deg, grey, rgb(92, 91, 91));
+  border: 3px solid transparent;
+  border-radius: 9px;
+  height: 10px;
+  /* width: ; */
+  /* height: 1rem; */
+  /* scrollbar-height: 1rem; */
+}
+
+.line {
+  width: 90%;
+  /* width: 0; */
+  height: 3px;
+  border-radius: 1px;
+  background-color: white;
+  /* margin-bottom: 20px; */
+  animation: grow 3s linear infinite;
+  transform-origin: left;
+}
+
+@keyframes grow {
+  0% {
+    transform: scaleX(0);
+  }
+}
+
+.line.active {
+  transition: width 3s ease-in;
+  width: 100%;
+}
