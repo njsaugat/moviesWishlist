@@ -1,14 +1,14 @@
 import {
-  faBusinessTime,
-  faHouse,
+  faBell,
+  faSearch,
   faHouseSignal,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect } from 'react';
 import Waves from './Waves';
 
-const houseIcon = <FontAwesomeIcon icon={faHouse} />;
-const businessIcon = <FontAwesomeIcon icon={faBusinessTime} />;
+const houseIcon = <FontAwesomeIcon icon={faSearch} />;
+const businessIcon = <FontAwesomeIcon icon={faBell} />;
 const smartHouseIcon = <FontAwesomeIcon icon={faHouseSignal} />;
 const sellingFactors = [
   {
