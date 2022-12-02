@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import getMovies from './GetMovies';
+import getMovies from './getMovies';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
@@ -35,7 +35,7 @@ export default function ShowMovies() {
   console.log(movies);
   return (
     <div className=" w-screen h-screen m-0 flex items-center justify-center flex-col  bg-gradient-to-tr from-gray-600 to-indigo-700">
-      <div
+      {/* <div
         className="search-bar 
        "
       >
@@ -52,7 +52,7 @@ export default function ShowMovies() {
           }}
         />
         <span className="search">{searchIcon}</span>
-      </div>
+      </div> */}
       <div className="movies w-screen  flex items-center justify-center gap-7 flex-wrap  md:w-full h-full  relative m-0 px-48">
         {movies.map((movie) => {
           return (
