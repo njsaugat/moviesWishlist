@@ -17,8 +17,8 @@ const TryService = () => {
         </svg>
       </div>
       <div className="flex flex-col md:flex-row relative p-10 md:p-20  justify-between items-center  bg-gradient-to-r from-slate-700 to-slate-900 ">
-        <div className="left w-3/5 pt-10">
-          <h1 className="font-bold text-5xl my-5  leading-tight md:leading-snug">
+        <div className="left w-full lg:w-3/5 pt-10">
+          <h1 className="font-bold text-5xl my-8  leading-tight md:leading-snug">
             Let’s start your movies wishlist now!
           </h1>
           <span className="text-gray-400 w-11/12">
@@ -31,7 +31,7 @@ const TryService = () => {
             </button>
           </Link>
         </div>
-        <div className="right boxes images w-2/5  h-36 flex items-center ">
+        <div className="right boxes images w-11/12 lg:w-2/5  h-36 flex items-center ">
           <div className="box first w-1/4 border-2 h-full "></div>
           <div className="box second w-1/2 border-2 h-44  "></div>
           <div className="box third w-1/4 border-2 h-full"></div>
