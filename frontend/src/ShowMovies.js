@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import getMovies from './getMovies';
+import getMovies from './movies/getMovies';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
@@ -20,11 +20,28 @@ export default function ShowMovies() {
   const [searchTerm, setSearchTerm] = useState('');
   const movieLink = useLocation();
   useEffect(() => {
-    (async () => {
-      const moviesData = await getMovies(searchTerm);
-      setMovies(moviesData);
-    })();
+    async function getMovies(searchTerm) {
+      const api_key = 'api_key=4fa5f43351cf51f47e092aa8911cb098';
+      const POPULAR_MOVIE_API_URL = `https://api.themoviedb.org/3/discover/movie/?${api_key}&sort_by=popularity.desc`;
+      const SEARCH_URL = `https://api.themoviedb.org/3/search/movie?${api_key}&query=${searchTerm}`;
+      let API_URL;
+      if (searchTerm) {
+        API_URL = SEARCH_URL;
+      } else {
+        API_URL = POPULAR_MOVIE_API_URL;
+      }
+      const resultData = await fetch(API_URL, { accept: 'application/json' });
+      const { results } = await resultData.json();
+      setMovies(results);
+      // return results;
+    }
+    getMovies();
+    // (async () => {
+    //   const moviesData = await getMovies(searchTerm);
+    //   setMovies(moviesData);
+    // })();
   }, [searchTerm]);
+
   if (movies === null || movies.length === 0) {
     return (
       <h1 className="font-bold flex items-center justify-center text-4xl mt-4">
