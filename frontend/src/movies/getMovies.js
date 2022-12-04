@@ -36,3 +36,16 @@ export async function getPopularMovies() {
   const { results } = await resultData.json();
   return results;
 }
+export async function getGenres() {
+  // const API_URL = `https://api.themoviedb.org/3/genre/movie/list?${api_key}&language=en-US`;
+  const API_URL = `https://api.themoviedb.org/3/genre/movie/list?${api_key}&language=en-US`;
+  const resultData = await fetch(API_URL, { accept: 'application/json' });
+  const { genres } = await resultData.json();
+  return genres;
+}
+export async function getTopMovies() {
+  const API_URL = `https://api.themoviedb.org/3/movie/top_rated?${api_key}&language=en-US&page=1`;
+  const resultData = await fetch(API_URL, { accept: 'application/json' });
+  const { results } = await resultData.json();
+  return results;
+}
