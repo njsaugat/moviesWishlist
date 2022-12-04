@@ -5,10 +5,12 @@ export default function GetMovie({ movie }) {
     // <div className="movie w-11/12 md:w-full   cursor-pointer relative flex items-center justify-center rounded-lg ">
     <div className="movie w-full  h-full cursor-pointer relative flex items-center justify-center rounded-lg ">
       <img
-        src={IMAGE_URL + movie.backdrop_path}
+        // src={IMAGE_URL + movie.backdrop_path}
+        src={IMAGE_URL + movie.poster_path}
         alt=""
         srcSet=""
         className="h-full md:h-72  object-cover mb-0  w-full lg:w-96 "
+        lazy="loading"
       />
 
       <div className="details flex items-center justify-center ">
