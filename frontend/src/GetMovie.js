@@ -9,17 +9,17 @@ export default function GetMovie({ movie }) {
         src={IMAGE_URL + movie.poster_path}
         alt=""
         srcSet=""
-        className="h-full md:h-72  object-cover mb-0  w-full lg:w-96 rounded-2xl shadow-2xl"
+        className="h-full   object-cover mb-0  w-full lg:w-96 rounded-2xl shadow-2xl"
         lazy="loading"
       />
 
       <div className="details flex items-center justify-center ">
         <div className="left flex  justify-center flex-col items-start">
           <span className="name mb-3 font-bold tracking-wider">
-            {/* {movie.title} */}
+            {movie.title}
           </span>
           <span className="likes">
-            {movie.release_date.substr(0, yearCount)}{' '}
+            {/* {movie.release_date.substr(0, yearCount)}{' '} */}
           </span>
         </div>
         <div className="right">
