@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './landingPage/LandingPage';
 import Landing from './landingPage/LandingPage';
+import ShowMovie from './movie/ShowMovie';
 import Home from './movies/Home';
-import ShowMovie from './ShowMovie';
+// import ShowMovie from './ShowMovie';
 import ShowMovies from './ShowMovies';
 import './style.css';
 
