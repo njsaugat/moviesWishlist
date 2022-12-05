@@ -23,7 +23,7 @@ const featuresIcon = <FontAwesomeIcon icon={faListCheck} />;
 const solutionIcon = <FontAwesomeIcon icon={faCoins} />;
 const portal = document.getElementById('portal');
 const menuIcons = [homeIcon, aboutUsIcon, featuresIcon, solutionIcon];
-const Navbar = () => {
+const Navbar = ({ transparent }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
@@ -66,7 +66,13 @@ const Navbar = () => {
     );
   };
   return (
-    <nav className="flex bg-gradient-to-r from-slate-700 to-slate-900 font-Poppins items-center space-x-2 px-10 md:px-20 w-screen gap-10 md:gap-32 lg:gap-1  relative navbar ">
+    <nav
+      className={`${
+        transparent === true
+          ? ''
+          : 'bg-gradient-to-r from-slate-700 to-slate-900'
+      } flex  font-Poppins items-center space-x-2 px-10 md:px-20 w-screen gap-10 md:gap-32 lg:gap-1  relative navbar `}
+    >
       <Banner />
       <div
         className="lg:hidden absolute right-4 md:right-10  text-3xl cursor-pointer rounded-lg  p-2 hover:rotate-180 hover:origin-center transition-all duration-300 "
