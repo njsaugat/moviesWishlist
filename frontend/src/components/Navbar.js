@@ -45,7 +45,7 @@ const Navbar = ({ transparent }) => {
     return createPortal(
       <div
         className={`fixed navs top-0 left-0 right-0 bottom-0 z-100 bg-gradient-to-b from-slate-900 to-slate-700  bg-opacity-95 overflow-y-hidden
-      w-screen h-screen text-white  transition-all ease-in-out delay-400 inset-0`}
+      w-screen h-screen text-white  transition-all ease-in-out delay-400 inset-0 z-10`}
       >
         <div className="absolute  transition-all  flex justify-between w-11/12 h-screen z-100    text-2xl  p-10 ">
           <div className="lists flex flex-col gap-10">
