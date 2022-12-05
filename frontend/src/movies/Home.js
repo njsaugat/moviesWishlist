@@ -28,6 +28,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   // const [moviesList,setMoviesList]=useState([{}]);
   // const movieLink = useLocation();
+
   useEffect(() => {
     (async () => {
       const moviesData = await getMovies(searchTerm);
@@ -50,51 +51,68 @@ const Home = () => {
       });
       //   setPicturePointer(pre);
     }
-    let interval = setInterval(changePicture, 3000);
+    let interval = setInterval(changePicture, 5000);
     return () => clearInterval(interval);
   }, [picturePointer, popularMovies.length]);
   if (loading) {
-    return <>'Loading'</>;
+    return (
+      <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-tr from-slate-400 to-slate-700 ">
+        Loading
+      </div>
+    );
   }
   console.log(genres);
   return (
     <>
-      <Navbar />
+      {/* <div className="mix-blend-screen">
+      </div> */}
       {/* <ShowMovies /> */}
       {/* for auto slide */}
 
-      <div className="w-screen min-h-screen bg-gradient-to-r from-slate-700 to-slate-900 text-white relative flex flex-col">
+      <div className="w-screen min-h-screen bg-gradient-to-r from-slate-700 to-slate-900 text-white relative flex flex-col text-white">
+        <div className="absolute z-10 ">
+          <Navbar transparent={true} />
+        </div>
         <div className="w-full h-full   ">
-          <div className="auto-slide  h-full flex   relative">
+          <div className="auto-slide  h-screen flex   relative">
             {popularMovies.map((movie, index) => {
               return (
                 <div
                   className={`${
                     picturePointer === index ? 'opacity-1' : 'opacity-0'
-                  } w-screen h-screen   absolute transition-all duration-300  movie-background`}
+                  } w-screen h-full  absolute  transition-all duration-300  movie-background`}
                   style={{
                     backgroundImage: `url(${IMAGE_URL + movie.backdrop_path})`,
                   }}
                   // style={{ backgroundColor: 'red' }}
                 >
-                  <div className="w-44 h-80 relative">
+                  <div className="w-screen     flex justify-between  ">
                     {/* Movie{movie} */}
                     {/* <GetMovie movie={movie} /> */}
-                    <img
-                      // src={IMAGE_URL + movie.backdrop_path}
-                      src={IMAGE_URL + movie.poster_path}
-                      alt=""
-                      srcSet=""
-                      className="h-full   object-cover mb-0  w-full  "
-                      lazy="loading"
-                    />
-
-                    <div
-                      className={` ${
-                        picturePointer === index ? 'active' : ''
-                      }  w-full  h-3  absolute bottom-0 line`}
-                    ></div>
+                    <div>
+                      <img
+                        // src={IMAGE_URL + movie.backdrop_path}
+                        src={IMAGE_URL + movie.poster_path}
+                        alt=""
+                        srcSet=""
+                        // className=" w-44 h-80 absolute rounded   object-cover mb-0  left-1/4 -translate-x-3/4  top-1/4 translate-y-3/4  "
+                        className=" w-44 h-80 absolute rounded   object-cover   left-1/2 -translate-x-1/2  top-2/3 -translate-y-1/2  mb-4 md:left-1/4 md:-translate-x-3/4 md:top-1/4 md:translate-y-3/4"
+                        // className=" w-44 h-80 absolute rounded   object-cover   flex items-center jus"
+                        lazy="loading"
+                      />
+                    </div>
+                    {/* <div className="text-white leading-10 tracking-wider w-64 md:w-96 lg:w-auto lg:px-10 font-bold text-4xl lg:text-5xl absolute right-1/3 translate-x-1/4 bottom-1/3 translate-y-3/4 "> */}
+                    {/* <div className="text-white leading-10 tracking-wider absolute text-4xl font-bold left-1/3 bottom-1/3 px-10 translate-y-1/4"> */}
+                    {/* <div className="text-white leading-10 tracking-wider absolute text-3xl font-bold left-1/2 -translate-x-1/2 -bottom-2 w-11/12   px-5 -translate-y-1/2 "> */}
+                    <div className="text-white leading-10 tracking-wider absolute text-3xl font-bold flex justify-center items-center w-full bottom-10 flex-wrap md:left-1/3 md:bottom-1/3 md:translate-y-1/4 md:justify-start md:px-10 md:text-5xl">
+                      {movie.title}
+                    </div>
                   </div>
+                  <div
+                    className={` ${
+                      picturePointer === index ? 'active' : ''
+                    }  w-full  h-3  absolute bottom-0 line`}
+                  ></div>
                 </div>
               );
             })}
@@ -102,33 +120,34 @@ const Home = () => {
         </div>
         {/* for hover: */}
 
-        {/* <div className="container-movies mt-20 overflow-x-auto h-40  flex w-11/12 self-center">
-          <div className="flex-scroll   flex items-center justify-center flex-nowrap ">
+        <div className="container-movies my-20 overflow-x-auto   flex w-11/12 self-center">
+          <div className="flex-scroll   flex items-center justify-center flex-nowrap gap-4 ">
             {movies.map((movie) => {
               return (
-                <div className="  w-20 h-20 border-2 mx-2 hover:w-40 transition-all duration-300 ">
+                <div className="  w-40 h-72  mb-6 hover:w-72 transition-all duration-300  ">
                   <GetMovie movie={movie} />
                 </div>
               );
             })}
           </div>
-        </div> */}
-        {/* <div>
-          <div className="flex flex-wrap ml-3 items-center gap-10 mt-10">
+        </div>
+        <div>
+          <div className=" ml-3 items-center flex flex-wrap gap-5 mt-10">
             {trendingMovies.map((movie, index) => {
               return (
-                <div className="border-2 w-28 h-28 relative rounded-xl">
-                  <GetMovie movie={movie} />
-                  {console.log(movie)}
-                  <span className="absolute -right-6 -top-5 font-bold text-5xl text-transparent bg-clip-text bg-gradient-to-t from-slate-600 to-slate-300 z-50">
-                    0{index + 1}
-                  </span>
-                </div>
+                index < 10 && (
+                  <div className=" w-40 h-72 relative rounded-xl">
+                    <GetMovie movie={movie} />
+                    <span className="absolute -right-6 -top-5 font-bold text-5xl text-transparent bg-clip-text bg-gradient-to-t from-slate-600 to-slate-300 z-50">
+                      0{index + 1}
+                    </span>
+                  </div>
+                )
               );
             })}
           </div>
-        </div> */}
-        {/* <div className="flex gap-5 flex-wrap m-10">
+        </div>
+        <div className="flex gap-5 flex-wrap m-10">
           {genres.map((genre) => {
             return (
               <div className="w-28 h-28  shadow-2xl  flex items-center justify-center  bg-gradient-to-r from-slate-800 to-slate-600 transition-all hover:bg-gradient-to-tr cursor-pointer hover:from-slate-500 hover:to-slate-800">
@@ -136,12 +155,17 @@ const Home = () => {
               </div>
             );
           })}
-        </div> */}
-        {/* <div>
+        </div>
+
+        <div className="flex flex-wrap min-h-screen gap-5 mb-10 w-screen items-center justify-center">
           {topMovies.map((movie) => {
-            return <GetMovie movie={movie} />;
+            return (
+              <div className=" w-40 h-72 relative rounded-xl ">
+                <GetMovie movie={movie} />
+              </div>
+            );
           })}
-        </div> */}
+        </div>
       </div>
       <Footer />
     </>
