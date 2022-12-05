@@ -206,6 +206,7 @@ body {
   /* margin-bottom: 20px; */
   animation: grow 4.6s linear infinite;
   transform-origin: left;
+  /* transform: scaleX(0); */
 }
 
 @keyframes grow {
