@@ -9,7 +9,7 @@ export default function GetMovie({ movie }) {
         src={IMAGE_URL + movie.poster_path}
         alt=""
         srcSet=""
-        className="h-full md:h-72  object-cover mb-0  w-full lg:w-96 "
+        className="h-full md:h-72  object-cover mb-0  w-full lg:w-96 rounded-2xl shadow-2xl"
         lazy="loading"
       />
 
