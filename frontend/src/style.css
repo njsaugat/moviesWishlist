@@ -235,6 +235,11 @@ body {
   height: 100%;
   position: absolute;
   /* z-index: -1; */
-  background-color: rgba(0, 0, 0, 0.7);
+  /* background-color: rgba(0, 0, 0, 0.7); */
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.084),
+    rgba(0, 0, 0, 0.99)
+  );
   /* opacity: 0.4; */
 }
