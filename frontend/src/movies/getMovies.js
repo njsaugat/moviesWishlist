@@ -49,3 +49,9 @@ export async function getTopMovies() {
   const { results } = await resultData.json();
   return results;
 }
+export async function getMovie(id) {
+  const API_URL = `https://api.themoviedb.org/3/movie/${id}?${api_key}`;
+  const resultData = await fetch(API_URL, { accept: 'application/json' });
+  const movie = await resultData.json();
+  return movie;
+}
