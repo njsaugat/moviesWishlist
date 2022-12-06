@@ -15,6 +15,8 @@ import {
   faAngleLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import MovieBg from '../components/MovieBg';
+import ScrollMovie from '../components/ScrollMovie';
 // import { getTrendingMovies } from './getTrendingMovies';
 // import getMovies from './getMovies';
 // import getMovies from 'getMovies';
@@ -27,6 +29,7 @@ const rightIcon = <FontAwesomeIcon icon={faAngleRight} />;
 
 const IMAGE_URL = 'https://image.tmdb.org/t/p/original/';
 const relativeImageSize = 215;
+const DESCRIPTION_MAX_LENGTH = 100;
 const Home = () => {
   const [picturePointer, setPicturePointer] = useState(0);
   const [movies, setMovies] = useState([]);
@@ -42,6 +45,41 @@ const Home = () => {
   const [showMore, setShowMore] = useState(false);
   const lineRef = useRef(null);
   // const movieLink = useLocation();
+
+  const ShowIcons = () => {
+    return (
+      <>
+        <span
+          className="absolute flex items-center justify-center w-8 h-8 rounded-full cursor-pointer top-1/2 left-1 bg-gradient-to-t from-slate-600 to-slate-800"
+          onClick={(e) => {
+            setPicturePointer((prevPointer) => {
+              return prevPointer < popularMovies.length - 1
+                ? prevPointer + 1
+                : 0;
+            });
+            document.body.querySelector('.line').style.transform = 'scaleX(0)';
+          }}
+        >
+          {leftIcon}
+        </span>
+        <span
+          className="absolute flex items-center justify-center w-8 h-8 rounded-full cursor-pointer top-1/2 right-4 bg-gradient-to-t from-slate-600 to-slate-800"
+          onClick={(e) => {
+            setPicturePointer((prevPointer) => {
+              return prevPointer > 0
+                ? prevPointer - 1
+                : popularMovies.length - 1;
+            });
+            // document.body.querySelector('.line').style.width =
+            //   '0px';
+            lineRef.current.style.animation = 'grow 4s linear infinite';
+          }}
+        >
+          {rightIcon}
+        </span>
+      </>
+    );
+  };
 
   useEffect(() => {
     (async () => {
@@ -87,7 +125,7 @@ const Home = () => {
   }, [picturePointer, popularMovies.length]);
   if (loading) {
     return (
-      <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-tr from-slate-400 to-slate-700 ">
+      <div className="flex items-center justify-center w-screen h-screen bg-gradient-to-tr from-slate-400 to-slate-700 ">
         Loading
       </div>
     );
@@ -100,111 +138,91 @@ const Home = () => {
       {/* <ShowMovies /> */}
       {/* for auto slide */}
 
-      <div className="w-screen min-h-screen bg-gradient-to-r from-slate-700 to-slate-900 text-white relative flex flex-col text-white">
+      <div className="relative flex flex-col w-screen min-h-screen text-white bg-gradient-to-r from-slate-700 to-slate-900">
         <div className="absolute z-10 ">
           <Navbar transparent={true} />
         </div>
-        <div className="w-full h-full   ">
-          <div className="auto-slide  h-screen flex   relative">
+        <div className="w-full h-full ">
+          <div className="relative flex h-screen auto-slide">
             {popularMovies.map((movie, index) => {
               return (
-                <div
-                  className={`${
-                    picturePointer === index ? 'opacity-1' : 'opacity-0'
-                  } w-screen h-full  absolute  transition-all duration-300  movie-background`}
-                  style={{
-                    backgroundImage: `url(${IMAGE_URL + movie.backdrop_path})`,
-                  }}
-                  // style={{ backgroundColor: 'red' }}
+                <MovieBg
+                  movie={movie}
+                  index={index}
+                  picturePointer={picturePointer}
+                  ShowIcons={<ShowIcons />}
+                  // <ShowIcons/>
                 >
-                  <div className="w-screen     flex justify-between  ">
-                    {/* Movie{movie} */}
-                    {/* <GetMovie movie={movie} /> */}
-                    <div>
-                      <img
-                        // src={IMAGE_URL + movie.backdrop_path}
-                        src={IMAGE_URL + movie.poster_path}
-                        alt=""
-                        srcSet=""
-                        // className=" w-44 h-80 absolute rounded   object-cover mb-0  left-1/4 -translate-x-3/4  top-1/4 translate-y-3/4  "
-                        className=" w-44 h-80 absolute rounded   object-cover   left-1/2 -translate-x-1/2  top-2/3 -translate-y-1/2  mb-4 md:left-1/4 md:-translate-x-3/4 md:top-1/4 md:translate-y-3/4"
-                        // className=" w-44 h-80 absolute rounded   object-cover   flex items-center jus"
-                        lazy="loading"
-                      />
-                    </div>
-                    {/* <div className="text-white leading-10 tracking-wider w-64 md:w-96 lg:w-auto lg:px-10 font-bold text-4xl lg:text-5xl absolute right-1/3 translate-x-1/4 bottom-1/3 translate-y-3/4 "> */}
-                    {/* <div className="text-white leading-10 tracking-wider absolute text-4xl font-bold left-1/3 bottom-1/3 px-10 translate-y-1/4"> */}
-                    {/* <div className="text-white leading-10 tracking-wider absolute text-3xl font-bold left-1/2 -translate-x-1/2 -bottom-2 w-11/12   px-5 -translate-y-1/2 "> */}
-                    <div className="text-white leading-10 tracking-wider absolute text-3xl font-bold flex justify-center items-center w-full bottom-10 flex-wrap md:w-96 lg:w-screen md:left-1/3 md:bottom-1/3 md:translate-y-1/2 md:justify-start md:px-10 md:text-5xl">
-                      {movie.title}
-                    </div>
-                    <span
-                      className="absolute cursor-pointer top-1/2 left-1  w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-t from-slate-600 to-slate-800"
-                      onClick={(e) => {
-                        setPicturePointer((prevPointer) => {
-                          return prevPointer < popularMovies.length - 1
-                            ? prevPointer + 1
-                            : 0;
-                        });
-                        document.body.querySelector('.line').style.transform =
-                          'scaleX(0)';
-                      }}
-                    >
-                      {leftIcon}
-                    </span>
-                    <span
-                      className="absolute cursor-pointer top-1/2 right-4 w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-t from-slate-600 to-slate-800"
-                      onClick={(e) => {
-                        setPicturePointer((prevPointer) => {
-                          return prevPointer > 0
-                            ? prevPointer - 1
-                            : popularMovies.length - 1;
-                        });
-                        // document.body.querySelector('.line').style.width =
-                        //   '0px';
-                        lineRef.current.style.animation =
-                          'grow 4s linear infinite';
-                      }}
-                    >
-                      {rightIcon}
-                    </span>
-                  </div>
-                  <div
-                    ref={lineRef}
-                    className={` ${
-                      picturePointer === index ? 'active' : ''
-                    }  w-full  h-3  absolute bottom-0 line`}
-                  ></div>
-                </div>
+                  {/* <ShowIcons /> */}
+                </MovieBg>
+                // <div
+                //   className={`${
+                //     picturePointer === index ? 'opacity-1' : 'opacity-0'
+                //   } w-screen h-full  absolute  transition-all duration-300  movie-background`}
+                //   style={{
+                //     backgroundImage: `url(${IMAGE_URL + movie.backdrop_path})`,
+                //   }}
+                // >
+                //   <div className="flex justify-between w-screen ">
+
+                //     <div>
+                //       <img
+                //         src={IMAGE_URL + movie.poster_path}
+                //         alt=""
+                //         srcSet=""
+                //         className="absolute object-cover mb-4 -translate-x-1/2 -translate-y-1/2 rounded  w-44 h-80 left-1/2 top-2/3 md:left-1/4 md:-translate-x-3/4 md:top-1/4 md:translate-y-3/4"
+                //         lazy="loading"
+                //       />
+                //     </div>
+
+                //     <div className="absolute flex flex-col flex-wrap w-full text-white bottom-10 md:w-96 lg:w-auto lg:break-words md:left-1/3 md:bottom-1/3 md:translate-y-1/2 md:justify-start md:px-10 ">
+                //       <span className="text-3xl font-bold leading-10 tracking-wider md:text-5xl">
+                //         {movie.title}
+                //       </span>
+                //       <span className="mt-4">
+                //         {movie.overview.substring(0, DESCRIPTION_MAX_LENGTH) +
+                //           '...'}
+                //       </span>
+                //     </div>
+                //     <ShowIcons />
+                //   </div>
+                //   <div
+                //     ref={lineRef}
+                //     className={` ${
+                //       picturePointer === index ? 'active' : ''
+                //     }  w-full  h-3  absolute bottom-0 line`}
+                //   ></div>
+                // </div>
               );
             })}
           </div>
         </div>
         {/* for hover: */}
 
-        <h1 className="text-2xl px-10 mt-5  ">Popular Movies</h1>
-        <div className="container-movies h-96  overflow-x-auto   flex  w-11/12 self-center">
-          <div className="  flex items-center justify-center flex-nowrap gap-4 ">
+        <h1 className="px-10 mt-5 text-2xl ">Popular Movies</h1>
+        <ScrollMovie movies={movies} />
+        {/* <div className="flex self-center w-11/12 overflow-x-auto container-movies h-96">
+          <div className="flex items-center justify-center gap-4  flex-nowrap">
             {movies.map((movie) => {
               return (
-                <div className="  w-40 h-72   hover:w-72 transition-all duration-300  ">
+                <div className="w-40 transition-all duration-300  h-72 hover:w-72">
                   <GetMovie movie={movie} />
                 </div>
               );
             })}
           </div>
-        </div>
+        </div> */}
 
-        <h1 className="text-2xl px-10  mb-1 mt-10 ">Trending Movies</h1>
+        <h1 className="px-10 mt-10 mb-1 text-2xl ">Trending Movies</h1>
         <div className="flex flex-col items-center justify-center">
-          <div className=" w-screen items-center flex flex-wrap gap-5 px-10 mt-2 ">
+          <div className="flex flex-wrap items-center w-screen gap-5 px-10 mt-2 ">
             {trendingMovies.map((movie, index) => {
               return (
                 index < showItems && (
                   <>
-                    <div className=" w-40 h-72 relative rounded-xl">
+                    <div className="relative w-40  h-72 rounded-xl">
                       <GetMovie movie={movie} />
-                      {/* <span className="absolute -right-6 -top-5 font-bold text-5xl text-transparent bg-clip-text bg-gradient-to-t from-slate-600 to-slate-300 z-10">
+                      {/* <span className="absolute z-10 text-5xl font-bold text-transparent -right-6 -top-5 bg-clip-text bg-gradient-to-t from-slate-600 to-slate-300">
                       0{index + 1}
                     </span> */}
                     </div>
@@ -227,27 +245,27 @@ const Home = () => {
               // e.target.remove();
             }}
           >
-            <div className=" show-more w-10 h-10 rounded-full shadow-2xl   bg-gradient-to-t from-slate-400 to-slate-600  flex justify-center items-center">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full shadow-2xl  show-more bg-gradient-to-t from-slate-400 to-slate-600">
               {showMoreIcon}
             </div>
           </div>
         </div>
 
-        <h1 className="text-2xl px-10  mb-1 mt-10 ">Trending Movies</h1>
-        <div className="container-movies   overflow-x-auto   flex  w-11/12 self-center">
-          <div className="  flex items-center justify-center flex-nowrap gap-4 mb-14">
+        <h1 className="px-10 mt-10 mb-1 text-2xl ">Trending Movies</h1>
+        <div className="flex self-center w-11/12 overflow-x-auto container-movies">
+          <div className="flex items-center justify-center gap-4  flex-nowrap mb-14">
             {trendingMovies.map((movie, index) => {
               return (
                 index < 10 && (
-                  <div className=" w-72 h-40 flex items-center justify-center rounded-xl">
-                    <span className=" font-bold text-8xl text-transparent bg-clip-text bg-gradient-to-l from-slate-600 to-slate-200 z-10">
+                  <div className="flex items-center justify-center h-40  w-72 rounded-xl">
+                    <span className="z-10 font-bold text-transparent  text-8xl bg-clip-text bg-gradient-to-l from-slate-600 to-slate-200">
                       {index + 1}
                     </span>
                     <GetMovie movie={movie} />
                   </div>
-                  // <div className=" w-40 h-72 relative rounded-xl">
+                  // <div className="relative w-40  h-72 rounded-xl">
                   //   <GetMovie movie={movie} />
-                  //   <span className="absolute -right-6 -top-5 font-bold text-5xl text-transparent bg-clip-text bg-gradient-to-t from-slate-600 to-slate-300 z-10">
+                  //   <span className="absolute z-10 text-5xl font-bold text-transparent -right-6 -top-5 bg-clip-text bg-gradient-to-t from-slate-600 to-slate-300">
                   //     0{index + 1}
                   //   </span>
                   // </div>
@@ -256,20 +274,20 @@ const Home = () => {
             })}
           </div>
         </div>
-        <div className="flex gap-5 flex-wrap m-10">
+        <div className="flex flex-wrap gap-5 m-10">
           {genres.map((genre) => {
             return (
-              <div className="w-28 h-28  shadow-2xl  flex items-center justify-center  bg-gradient-to-r from-slate-800 to-slate-600 transition-all hover:bg-gradient-to-tr cursor-pointer hover:from-slate-500 hover:to-slate-800">
+              <div className="flex items-center justify-center transition-all shadow-2xl cursor-pointer w-28 h-28 bg-gradient-to-r from-slate-800 to-slate-600 hover:bg-gradient-to-tr hover:from-slate-500 hover:to-slate-800">
                 {genre.name}
               </div>
             );
           })}
         </div>
 
-        <div className="flex flex-wrap min-h-screen gap-5 mb-10 w-screen items-center justify-center">
+        <div className="flex flex-wrap items-center justify-center w-screen min-h-screen gap-5 mb-10">
           {topMovies.map((movie) => {
             return (
-              <div className=" w-40 h-72 relative rounded-xl ">
+              <div className="relative w-40  h-72 rounded-xl">
                 <GetMovie movie={movie} />
               </div>
             );
