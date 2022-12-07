@@ -32,11 +32,11 @@ const Banner = () => {
   );
   return (
     <Link to="/">
-      <div className="logo w-3/5  flex items-center font-bold text-4xl my-5  leading-tight md:leading-snug md:w-1/2">
-        <span className="text-4xl mr-2 shadow-2xl shadow-slate-50">
+      <div className="flex items-center w-3/5 my-5 text-4xl font-bold leading-tight logo md:leading-snug md:w-1/2 drop-shadow-md">
+        <span className="mr-2 text-4xl shadow-2xl shadow-slate-50">
           {movieIcon}
         </span>
-        <span className="drop-shadow-md text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-400 ">
+        <span className="text-transparent drop-shadow-md bg-clip-text bg-gradient-to-r from-slate-200 to-slate-400 ">
           Cine
         </span>
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-purple-500 ">
