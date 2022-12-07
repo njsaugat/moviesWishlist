@@ -251,10 +251,28 @@ body {
   height: 0; */
 }
 
-.video-responsive iframe {
-  /* left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  position: absolute; */
+.show-more-reviews.active {
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.004),
+    rgba(15, 23, 42, 0.99)
+  );
+  transition: all 0.3s ease;
+}
+
+.show-more-reviews:hover {
+  background-image: linear-gradient(
+    180deg,
+    /* rgba(15, 23, 42, 0.1), */ rgba(255, 255, 255, 0.004),
+    rgba(15, 23, 42, 0.49)
+  );
+  /* z-index: -1; */
+}
+.search-input {
+  width: 0;
+  color: black;
+  transition: width 0.3s ease-in-out;
+}
+.search-input.active {
+  width: 20rem;
 }
