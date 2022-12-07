@@ -9,7 +9,10 @@ import TryService from './TryService';
 const LandingPage = () => {
   return (
     <>
-      <Navbar />
+      <div className="absolute z-10 ">
+        <Navbar transparent={true} />
+      </div>
+
       <Heroes />
       <Business />
       <TryService />
