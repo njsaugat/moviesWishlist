@@ -4,9 +4,9 @@ const IMAGE_URL = 'https://image.tmdb.org/t/p/original/';
 const yearCount = 4;
 export default function GetMovie({ movie }) {
   return (
-    // <div className="movie w-11/12 md:w-full   cursor-pointer relative flex items-center justify-center rounded-lg ">
+    // <div className="relative flex items-center justify-center w-11/12 rounded-lg cursor-pointer movie md:w-full ">
     <Link
-      className="movie w-full  h-full cursor-pointer relative flex items-center justify-center rounded-lg "
+      className="relative flex items-center justify-center w-full h-full rounded-lg cursor-pointer movie "
       to={`/movie/${movie.id}`}
       state={movie}
     >
@@ -15,13 +15,13 @@ export default function GetMovie({ movie }) {
         src={IMAGE_URL + movie.poster_path}
         alt=""
         srcSet=""
-        className="h-full   object-cover mb-0  w-full lg:w-96 rounded-2xl shadow-2xl"
+        className="object-cover w-full h-full mb-0 shadow-2xl lg:w-96 rounded-2xl"
         lazy="loading"
       />
 
-      <div className="details flex items-center justify-center ">
-        <div className="left flex  justify-center flex-col items-start">
-          <span className="name mb-3 font-bold tracking-wider">
+      <div className="flex items-center justify-center details ">
+        <div className="flex flex-col items-start justify-center left">
+          <span className="mb-3 font-bold tracking-wider name">
             {movie.title}
           </span>
           <span className="likes">
