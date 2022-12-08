@@ -1,0 +1,39 @@
+.option input {
+  /* width: 100%; */
+  margin-top: 10px;
+  font: inherit;
+  height: 40px;
+  padding: 5px 10px;
+  /* border: 2px solid rgba(128, 128, 128, 0.162); */
+  /* border-radius: 5px; */
+  transition: box-shadow 0.4s ease, border 0.4s ease;
+}
+.option.option2 input {
+  margin-top: 0px;
+}
+
+input.invalid {
+  border: 2px solid red;
+}
+input.valid {
+  border: 2px solid rgba(172, 255, 47, 0.92);
+}
+.option input:hover,
+.option input:focus {
+  outline: none;
+  box-shadow: 0px 2px 5px rebeccapurple;
+  border: 1px solid rebeccapurple;
+}
+
+input.invalid:focus {
+  outline: none;
+  box-shadow: none;
+  border: 2px solid red;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  line-height: 10px;
+}
