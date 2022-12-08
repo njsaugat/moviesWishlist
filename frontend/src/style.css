@@ -3,6 +3,7 @@
   box-sizing: border-box;
 }
 @import url('parralax.css');
+@import url('validate.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -229,7 +230,8 @@ body {
   /* background-blend-mode: lighten; */
   /* mix-blend-mode: overlay; */
 }
-.movie-background::before {
+.movie-background::before,
+.navbar::before {
   content: '';
   width: 100%;
   height: 100%;
@@ -242,6 +244,13 @@ body {
     rgba(0, 0, 0, 0.99)
   );
   /* opacity: 0.4; */
+}
+.navbar::before {
+  background-image: linear-gradient(
+    360deg,
+    rgba(255, 255, 255, 0.004),
+    rgba(0, 0, 0, 0.99)
+  );
 }
 
 .video-responsive {
@@ -269,10 +278,27 @@ body {
   /* z-index: -1; */
 }
 .search-input {
-  width: 0;
-  color: black;
-  transition: width 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  /* padding-left: 10px; */
 }
 .search-input.active {
   width: 20rem;
+  /* padding: 0.5rem; */
+  background-color: white;
+}
+.search-input.active .search-icon {
+  color: black;
+}
+
+.search-bar input {
+  /* transition: 0.3s ease-in-out; */
+  width: 18rem;
+  /* padding: 1rem; */
+}
+.search-input.active input {
+  /* width: 18rem; */
+  display: block;
+}
+body {
+  overflow-x: hidden;
 }
