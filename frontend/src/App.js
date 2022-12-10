@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './landingPage/LandingPage';
 import Landing from './landingPage/LandingPage';
@@ -13,6 +13,16 @@ import './style.css';
 export const LoggedInContext = createContext();
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    async function checkAuthenticated() {
+      const data = await fetch('/isAuthenticated');
+      const validation = await data.json();
+      if (validation.loggedIn === true) {
+        setLoggedIn(true);
+      }
+    }
+    checkAuthenticated();
+  }, []);
   return (
     <LoggedInContext.Provider value={{ loggedIn, setLoggedIn }}>
       <BrowserRouter>
