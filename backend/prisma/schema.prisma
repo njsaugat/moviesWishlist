@@ -21,7 +21,7 @@ model User {
 }
 
 model Movie{
-  movieId String @id
+  movieId Int @id
   user   User @relation(fields: [userId], references: [id])
   userId String
   @@index([movieId])
