@@ -62,14 +62,14 @@ const usefulLinks = [
 const Footer = () => {
   const renderUsefulLinks = usefulLinks.map((usefulLink) => {
     return (
-      <div className="category flex flex-col" key={usefulLink.id}>
-        <h1 className="font-bold text-xl my-3  leading-tight md:leading-snug">
+      <div className="flex flex-col category" key={usefulLink.id}>
+        <h1 className="my-3 text-xl font-bold leading-tight md:leading-snug">
           {usefulLink.name}
         </h1>
         {usefulLink.links.map((link, index) => {
           return (
             <a
-              className="no-underline my-1"
+              className="my-1 no-underline"
               href={link.url}
               key={index}
               target="_blank"
@@ -83,23 +83,23 @@ const Footer = () => {
     );
   });
   return (
-    <div className="p-10 md:p-20 pt-5 bg-black text-white">
-      <div className="flex flex-col lg:flex-row items-center justify-center">
-        <div className="left flex flex-col justify-center items-center w-full md:w-2/5 my-10">
+    <div className="p-10 pt-5 text-white bg-black md:p-20">
+      <div className="flex flex-col items-center justify-center lg:flex-row">
+        <div className="flex flex-col items-center justify-center w-full my-10 left md:w-2/5">
           <Banner />
-          <span className="text-gray-400 mt-10">
+          <span className="mt-10 text-gray-400">
             A new way to binge watch
             <br />
             your movies.
           </span>
         </div>
-        <div className="right item flex justify-center  w-full md:w-3/5 gap-10 md:gap-x-32">
+        <div className="flex justify-center w-full gap-10 right item md:w-3/5 md:gap-x-32">
           {renderUsefulLinks}
         </div>
       </div>
       <div className=" bg-gray-500  mx-10 h-0.5 my-5"></div>
-      <span className="py- text-gray-400 flex justify-center items-center">
-        Copyright © {getDate()} GharShar. All Rights Reserved. © Saugat Poudel
+      <span className="flex items-center justify-center text-gray-400 py-">
+        Copyright © {getDate()} CineWish. All Rights Reserved. © Saugat Poudel
       </span>
     </div>
   );
