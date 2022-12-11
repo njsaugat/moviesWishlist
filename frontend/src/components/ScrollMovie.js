@@ -2,7 +2,7 @@ import React from 'react';
 import GetMovie from '../GetMovie';
 
 const ScrollMovie = ({ movies }) => {
-  console.log(movies);
+  // console.log(movies);
   return (
     <div className="flex self-center w-11/12 overflow-x-auto container-movies h-96">
       <div className="flex items-center justify-center gap-4 flex-nowrap">
