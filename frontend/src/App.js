@@ -13,18 +13,31 @@ import './style.css';
 export const LoggedInContext = createContext();
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [moviesWishlistIds, setMoviesWishlistIds] = useState([]);
   useEffect(() => {
     async function checkAuthenticated() {
       const data = await fetch('/isAuthenticated');
       const validation = await data.json();
       if (validation.loggedIn === true) {
         setLoggedIn(true);
+        const results = await fetch('/movies-wishlist');
+        const moviesId = await results.json();
+        console.log(moviesId);
+        setMoviesWishlistIds(moviesId);
+        // sessionStorage.setItem('moviesWishlistIds', moviesId);
       }
     }
     checkAuthenticated();
   }, []);
   return (
-    <LoggedInContext.Provider value={{ loggedIn, setLoggedIn }}>
+    <LoggedInContext.Provider
+      value={{
+        loggedIn,
+        setLoggedIn,
+        moviesWishlistIds,
+        setMoviesWishlistIds,
+      }}
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/signup" element={<Signup />} />
