@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LoggedInContext } from '../App';
+import ShowPortal from './ShowPortal';
 // import ShowPortal from '../components/ShowPortal';
 
 const RenderMenuList = ({ icons }) => {
@@ -25,14 +26,14 @@ const RenderMenuList = ({ icons }) => {
 
   return (
     <>
-      <Link to={'/user/properties'} rel="noreferrer" className="list-none">
+      <Link to={'/home'} rel="noreferrer" className="list-none">
         {icons && icons[0]} Home
       </Link>
-      <Link to={'/explore'} rel="noreferrer" className="list-none">
+      <Link to={'/home'} rel="noreferrer" className="list-none">
         {icons && icons[3]} Explore
       </Link>
       <Link to={'/register-property'} rel="noreferrer" className="list-none">
-        {icons && icons[2]} Add Property
+        {icons && icons[2]} Add Movie
       </Link>
       <a href="# " rel="noreferrer" className="list-none">
         {icons && icons[1]} About Us
@@ -45,7 +46,7 @@ const RenderMenuList = ({ icons }) => {
       >
         {icons && icons[1]} Log Out
       </div>
-      {/* {showOptions && (
+      {showOptions && (
         <ShowPortal
           showOptions={showOptions}
           // closeModal={() => setShowOptions(false)}
@@ -55,7 +56,7 @@ const RenderMenuList = ({ icons }) => {
           message={'Do you want to log out?'}
           logOut={true}
         />
-      )} */}
+      )}
     </>
   );
 };
