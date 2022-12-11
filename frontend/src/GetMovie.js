@@ -1,30 +1,93 @@
 import { Link } from 'react-router-dom';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 // import { Axios } from 'axios';
 import axios, * as others from 'axios';
 import { createPortal } from 'react-dom';
+import { LoggedInContext } from './App';
 const IMAGE_URL = 'https://image.tmdb.org/t/p/original/';
 const yearCount = 4;
 const wishIcon = <FontAwesomeIcon icon={faHeart} beat />;
 export default function GetMovie({ movie }) {
+  const { moviesWishlistIds } = useContext(LoggedInContext);
+  // let moviesWishlistIds = JSON.parse(
+  //   sessionStorage.getItem('moviesWishlistIds')
+  // );
+
+  // console.log(moviesWishlistIds);
+  // const [movieLiked, setMovieLiked] = useState(() => {
+  //   // console.log(moviesWishlistIds.includes(movie.id));
+  //   return moviesWishlistIds.includes(movie.id) ? true : false;
+  // });
   const [movieLiked, setMovieLiked] = useState(false);
-  const [movieAdded, setMovieAdd] = useState(null);
+  const [movieAddedFeedback, setMovieAdd] = useState(null);
+
+  // useEffect(() => {
+  //   if (moviesWishlistIds.includes(movie.id)) {
+  //     // setTimeout(() => setMovieLiked(true), 0);
+
+  //     // (() => setMovieLiked(true))();
+  //     // console.log();
+  //     document.getElementById(`${movie.id}`).style.color = `red`;
+  //     console.log(document.getElementById(`${movie.id}`).style.color);
+  //     setMovieLiked(true);
+  //   }
+  // }, [moviesWishlistIds, movie.id]);
+  // moviesWishlistIds.includes(movie.id) && setMovieLiked(true);
+
+  // if (moviesWishlistIds.length <= 0) {
+  //   return 'Loading';
+  // }
+
+  if (
+    moviesWishlistIds.length >= 0 &&
+    moviesWishlistIds.includes(movie.id) &&
+    document.getElementById(`${movie.id}`)
+  ) {
+    // document.getElementById(`${movie.id}`).style.color = `red !important`;
+    document
+      .getElementById(`${movie.id}`)
+      .setAttribute('style', 'color:red !important');
+    // console.log(document.getElementById(`${movie.id}`).style.color);
+  }
   const ShowMovieAddedFeedBack = () => {
-    setTimeout(() => {
-      if (document.querySelector('.movie-feedback')) {
-        document.querySelector('.movie-feedback').remove();
-      }
-    }, 3000);
+    // setTimeout(() => {
+    //   if (document.querySelector('.movie-feedback')) {
+    //     document.querySelector('.movie-feedback').remove();
+    //   }
+    // }, 3000);
+    // if(movie.id === moviesWishListIds)==> color red
+    // console.log(moviesWishlistIds);
+    // if (moviesWishlistIds.includes(movie.id)) {
+    //   console.log('movie already liked');
+    //   setMovieLiked(true);
+    // }
+    const [showDiv, setShowDiv] = useState(movieAddedFeedback ? true : false);
+    useEffect(() => {
+      const timeout = setTimeout(() => {
+        setShowDiv(false);
+        //have set the movie addition feedback to false
+        setMovieAdd(false);
+      }, 3000); // hide the div after 3 seconds
+      return () => {
+        clearTimeout(timeout);
+      };
+    }, []);
     return createPortal(
-      <div className="fixed z-50 flex justify-center w-56 p-3 tracking-wide text-black rounded-lg movie-feedback bottom-5 right-5 bg-slate-200 ">
-        Movie was {movieAdded ? 'added' : 'not added'}
-      </div>,
+      showDiv && (
+        <div
+          className={`
+      fixed z-50 flex justify-center w-56 p-3 tracking-wide text-black rounded-lg movie-feedback bottom-5 right-5 bg-slate-200 `}
+        >
+          Movie was {movieAddedFeedback ? 'added' : 'not added'} !
+        </div>
+      ),
       document.getElementById('portal3')
     );
   };
 
+  // console.log(movieLiked);
   return (
     // <div className="relative flex items-center justify-center w-11/12 rounded-lg cursor-pointer movie md:w-full ">
     <>
@@ -46,28 +109,31 @@ export default function GetMovie({ movie }) {
             className={`${
               movieLiked ? 'text-red-600' : 'text-white'
             } self-end pt-1 pr-2 text-xl text-white opacity-0 wish-icon`}
+            id={movie.id}
             onClick={(e) => {
               console.log(movieLiked);
-              setMovieLiked(true);
               e.preventDefault();
-              e.target.classList.add('text-red-600');
-              axios
-                .post('/add-movie', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'mutlipart/form-data',
-                  },
-                  body: {
-                    movieId: movie.id,
-                  },
-                })
-                .then((res) => {
-                  console.log(res.data.movieAdded);
-                  if (res.data.movieAdded) {
-                    return setMovieAdd(true);
-                  }
-                  return setMovieAdd(false);
-                });
+              setMovieLiked(true);
+              if (!moviesWishlistIds.includes(movie.id)) {
+                e.target.classList.add('text-red-600');
+                axios
+                  .post('/add-movie', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'mutlipart/form-data',
+                    },
+                    body: {
+                      movieId: movie.id,
+                    },
+                  })
+                  .then((res) => {
+                    console.log(res.data.movieAddedFeedback);
+                    if (res.data.movieAddedFeedback) {
+                      return setMovieAdd(true);
+                    }
+                    return setMovieAdd(false);
+                  });
+              }
               // e.target.classList.remov
               // e('beat');
             }}
@@ -87,7 +153,7 @@ export default function GetMovie({ movie }) {
           <div className="right"></div>
         </div>
       </Link>
-      {(movieAdded === true || movieAdded === false) && (
+      {(movieAddedFeedback === true || movieAddedFeedback === false) && (
         <ShowMovieAddedFeedBack />
       )}
     </>
