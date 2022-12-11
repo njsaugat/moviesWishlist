@@ -10,13 +10,23 @@ exports.addMovie = async (req, res) => {
         user: { connect: { id: req.session.user.id } },
       },
     });
-    await res.send({
-      movieAdded: true,
+    res.send({
+      movieAddedFeedback: true,
     });
   } catch (err) {
     console.log(err);
     res.send({
-      movieAdded: false,
+      movieAddedFeedback: false,
     });
   }
+};
+
+exports.getMovieWishlist = async (req, res) => {
+  const moviesWishlistId = await prisma.movie.findMany({
+    where: {
+      userId: req.session.user.id,
+    },
+  });
+  // console.log();
+  res.send(moviesWishlistId.map((movie) => movie.movieId));
 };
