@@ -21,8 +21,8 @@ input.valid {
 .option input:hover,
 .option input:focus {
   outline: none;
-  box-shadow: 0px 2px 5px rebeccapurple;
-  border: 1px solid rebeccapurple;
+  box-shadow: 0px 2px 10px rgb(205, 161, 248);
+  border: 1px solid rgb(221, 186, 255);
 }
 
 input.invalid:focus {
