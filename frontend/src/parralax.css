@@ -54,7 +54,7 @@
   transform: rotateX(0deg) rotateY(-30deg);
   perspective: 1000px;
   transform-style: preserve-3d;
-  background-image: url('./assets/clapperBoard.png');
+  /* background-image: url('./assets/clapperBoard.png'); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
