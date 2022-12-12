@@ -263,6 +263,9 @@ body {
     rgba(0, 0, 0, 0.99)
   );
 }
+.wish-icon.active {
+  color: red !important;
+}
 
 .video-responsive {
   padding-bottom: 56.25%;
