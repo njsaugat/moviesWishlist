@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import DisplayMovies from './movies/DisplayMovies';
+import DisplayMovies from './DisplayMovies';
 import getMovies, { getMoviesOfGenres } from './movies/getMovies';
 
 const MoviesGenres = () => {
