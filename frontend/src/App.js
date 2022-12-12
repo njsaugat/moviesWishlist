@@ -6,6 +6,7 @@ import Login from './login-signup/Login';
 import Signup from './login-signup/Signup';
 import ShowMovie from './movie/ShowMovie';
 import Home from './movies/Home';
+import MoviesWishlist from './movies/MoviesWishlist';
 import MoviesGenres from './MoviesGenres';
 // import ShowMovie from './ShowMovie';
 import ShowMovies from './ShowMovies';
@@ -22,7 +23,7 @@ function App() {
         setLoggedIn(true);
         const results = await fetch('/movies-wishlist');
         const moviesId = await results.json();
-        console.log(moviesId);
+        // console.log(moviesId);
         setMoviesWishlistIds(moviesId);
         // sessionStorage.setItem('moviesWishlistIds', moviesId);
       }
@@ -46,6 +47,7 @@ function App() {
           {/* <Route path="/" element={<ShowMovies />} />; */}
           <Route path="/home" element={<Home />} />;
           <Route path="/movie/:id" element={<ShowMovie />} />;
+          <Route path="/movies-wishlist" element={<MoviesWishlist />} />
           <Route path="movies/search/:searchTerm" element={<ShowMovies />} />;
           <Route
             path="movies/genre/:genreName/:id"
