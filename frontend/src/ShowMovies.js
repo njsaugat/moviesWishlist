@@ -3,11 +3,11 @@ import getMovies from './movies/getMovies';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import GetMovie from './GetMovie';
+import GetMovie from './movies/GetMovie';
 import Landing from './landingPage/LandingPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import DisplayMovies from './movies/DisplayMovies';
+import DisplayMovies from './DisplayMovies';
 
 const searchIcon = <FontAwesomeIcon icon={faMagnifyingGlass} />;
 // function ShowSearchResults({ searchTerm }) {
