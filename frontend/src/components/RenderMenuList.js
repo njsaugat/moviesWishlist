@@ -32,8 +32,8 @@ const RenderMenuList = ({ icons }) => {
       <Link to={'/home'} rel="noreferrer" className="list-none">
         {icons && icons[3]} Explore
       </Link>
-      <Link to={'/register-property'} rel="noreferrer" className="list-none">
-        {icons && icons[2]} Add Movie
+      <Link to={'/movies-wishlist'} rel="noreferrer" className="list-none">
+        {icons && icons[2]} Wishlist
       </Link>
       <a href="# " rel="noreferrer" className="list-none">
         {icons && icons[1]} About Us
