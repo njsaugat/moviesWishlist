@@ -1,5 +1,5 @@
 import React from 'react';
-import GetMovie from '../GetMovie';
+import GetMovie from '../movies/GetMovie';
 const IMAGE_URL = 'https://image.tmdb.org/t/p/original/';
 const DESCRIPTION_MAX_LENGTH = 100;
 const MovieBg = ({ movie, index, picturePointer, ShowIcons }) => {
@@ -21,7 +21,10 @@ const MovieBg = ({ movie, index, picturePointer, ShowIcons }) => {
             className="absolute object-cover mb-4 -translate-x-1/2 -translate-y-1/2 rounded w-44 h-80 left-1/2 top-2/3 md:left-1/4 md:-translate-x-3/4 md:top-1/4 md:translate-y-3/4"
             lazy="loading"
           /> */}
-          <GetMovie movie={movie} />
+          <div className="absolute w-40 transition-all duration-300 h-72 hover:w-72">
+            <GetMovie movie={movie} movieId={false} />
+          </div>
+          {/* <GetMovie movie={movie} movieId={false} /> */}
         </div>
         <div className="absolute flex flex-col flex-wrap w-full text-white bottom-10 md:w-96 lg:w-auto lg:break-words md:left-1/3 md:bottom-1/3 md:translate-y-1/2 md:justify-start md:px-10 ">
           <span className="text-3xl font-bold leading-10 tracking-wider md:text-5xl">
@@ -33,7 +36,9 @@ const MovieBg = ({ movie, index, picturePointer, ShowIcons }) => {
               : movie.overview} */}
             {movie.overview.substring(0, DESCRIPTION_MAX_LENGTH) + '...'}
           </span>
-          {/* <button>Add to Wishlist</button> */}
+          {/* <button className="self-start p-2 mt-4 text-black bg-gradient-to-t from-purple-200 to-purple-500 rounded-3xl">
+            Add to Wishlist
+          </button> */}
         </div>
         {ShowIcons}
       </div>
