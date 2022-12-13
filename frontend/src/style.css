@@ -313,6 +313,13 @@ body {
   /* width: 18rem; */
   display: block;
 }
+
+.notification:hover .reminder,
+.notification:hover .select-list {
+  display: flex;
+  /* opacity: 1; */
+  /* visibility: visible; */
+}
 body {
   overflow-x: hidden;
 }
