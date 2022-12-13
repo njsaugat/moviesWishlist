@@ -1,5 +1,5 @@
 import React from 'react';
-import GetMovie from '../GetMovie';
+import GetMovie from '../movies/GetMovie';
 
 const ScrollMovie = ({ movies }) => {
   // console.log(movies);
