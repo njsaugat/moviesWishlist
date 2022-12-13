@@ -4,6 +4,7 @@ const { postLoginInfo, logout } = require('../controllers/loginController');
 const {
   addMovie,
   getMovieWishlist,
+  setMovieReminder,
 } = require('../controllers/movieController');
 const { postUser, getUser } = require('../controllers/signupController');
 const router = express.Router();
@@ -17,6 +18,8 @@ router.post('/add-movie', addMovie);
 router.get('/user/:id', getUser);
 
 router.get('/movies-wishlist', getMovieWishlist);
+
+router.post('/movie-reminder', setMovieReminder);
 
 router.post('/logout', logout);
 
