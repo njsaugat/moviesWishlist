@@ -170,17 +170,6 @@ body {
 
 .container-movies {
   overscroll-behavior-inline: contain;
-  /* width: 100vw;
-  position: relative; */
-  /* left: calc(-50vw + 50%); */
-  /* left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw; */
-  /* display: grid;
-  grid-template-columns: calc((100vw - 50vh) / 2) 50vh calc(
-      100% - (50vh + 100vw) / 2
-    ); */
 }
 
 .container-movies::-webkit-scrollbar {
@@ -188,6 +177,25 @@ body {
   /* width: 0.1rem; */
   width: 50%;
   height: 0.5rem;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  scrollbar-width: thin;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  scrollbar-width: thin;
+  /* scrollbar-width: ; */
+  /* width: 2rem; */
+  background: linear-gradient(45deg, grey, rgb(92, 91, 91));
+  border: 3px solid transparent;
+  border-radius: 9px;
+  width: 10px;
+  /* width: ; */
+  /* height: 1rem; */
+  /* scrollbar-height: 1rem; */
 }
 .container-movies::-webkit-scrollbar-track {
   /* scrollbar-width: thin; */

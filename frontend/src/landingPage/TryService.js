@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-const TryService = () => {
+const IMAGE_URL = 'https://image.tmdb.org/t/p/original/';
+
+const TryService = ({ movieImgs }) => {
+  console.log(movieImgs);
   return (
     <>
       <div class="custom-shape-divider-top-1669726171">
@@ -16,25 +19,34 @@ const TryService = () => {
           ></path>
         </svg>
       </div>
-      <div className="flex flex-col md:flex-row relative p-10 md:p-20  justify-between items-center  bg-gradient-to-r from-slate-700 to-slate-900 ">
-        <div className="left w-full lg:w-3/5 pt-10">
-          <h1 className="font-bold text-5xl my-8  leading-tight md:leading-snug">
+      <div className="relative flex flex-col items-center justify-between p-10 md:flex-row md:p-20 bg-gradient-to-r from-slate-700 to-slate-900 ">
+        <div className="w-full pt-10 left lg:w-3/5">
+          <h1 className="my-8 text-5xl font-bold leading-tight md:leading-snug">
             Let’s start your movies wishlist now!
           </h1>
-          <span className="text-gray-400 w-11/12">
-            Find the right house over the wide rande of houses.
+          <span className="w-11/12 text-gray-400">
+            Find the right movie over the wide range of movies.
           </span>
           <br />
           <Link to="/signup">
-            <button className="py-3 px-5 my-10 bg-gradient-to-t from-purple-500 to-purple-100  rounded-lg text-black hover:shadow-xl hover:scale-105 transition-all duration-300">
+            <button className="px-5 py-3 my-10 text-black transition-all duration-300 rounded-lg bg-gradient-to-t from-purple-500 to-purple-100 hover:shadow-xl hover:scale-105">
               Sign Up
             </button>
           </Link>
         </div>
-        <div className="right boxes images w-11/12 lg:w-2/5  h-36 flex items-center ">
-          <div className="box first w-1/4 border-2 h-full "></div>
-          <div className="box second w-1/2 border-2 h-44  "></div>
-          <div className="box third w-1/4 border-2 h-full"></div>
+        <div className="flex items-center w-11/12 right boxes images lg:w-2/5 h-36 ">
+          <div
+            className="w-1/4 h-full bg-center bg-no-repeat bg-cover border-2 box first"
+            style={{ backgroundImage: `url(${IMAGE_URL + movieImgs[0]})` }}
+          ></div>
+          <div
+            className="w-1/2 bg-center bg-no-repeat bg-cover border-2 box second h-44 "
+            style={{ backgroundImage: `url(${IMAGE_URL + movieImgs[1]})` }}
+          ></div>
+          <div
+            className="w-1/4 h-full bg-center bg-no-repeat bg-cover border-2 box third"
+            style={{ backgroundImage: `url(${IMAGE_URL + movieImgs[2]})` }}
+          ></div>
         </div>
       </div>
     </>

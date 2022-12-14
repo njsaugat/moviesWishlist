@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './landingPage/LandingPage';
-import Landing from './landingPage/LandingPage';
 import Login from './login-signup/Login';
 import Signup from './login-signup/Signup';
 import ShowMovie from './movie/ShowMovie';
@@ -44,7 +43,6 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<LandingPage />} />;
-          {/* <Route path="/" element={<ShowMovies />} />; */}
           <Route path="/home" element={<Home />} />;
           <Route path="/movie/:id" element={<ShowMovie />} />;
           <Route path="/movies-wishlist" element={<MoviesWishlist />} />

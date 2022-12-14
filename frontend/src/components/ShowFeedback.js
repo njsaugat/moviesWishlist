@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const ShowFeedback = ({ movieFeedback, setMovieFeedback, sendEmail }) => {
-  const [showDiv, setShowDiv] = useState(movieFeedback ? true : false);
+  const [showDiv, setShowDiv] = useState(true);
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowDiv(false);
       //have set the movie addition feedback to false
       setMovieFeedback(false);
-    }, 3000); // hide the div after 3 seconds
+    }, 3000);
     return () => {
       clearTimeout(timeout);
     };

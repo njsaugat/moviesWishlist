@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import Banner from '../components/Banner';
+import React, { useContext, useRef } from 'react';
 import Tagline from '../components/Tagline';
-// import login from '../login.png';
 import login from '../assets/clapperBoard.png';
 
 import Axios from 'axios';
@@ -9,21 +7,16 @@ import { checkEmail, checkPassword, loginValidator } from './validator';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoggedInContext } from '../App';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 const Login = () => {
   const navigate = useNavigate();
-  document.title = 'GharShar | Login';
+  document.title = 'CineWish | Login';
   const email = useRef(null);
   const password = useRef(null);
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext);
-  // const [userId, setUserId] = useState('');
-
-  // useEffect(() => {
-  //   localStorage.setItem('userId', userId);
-  // }, [userId]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // const
     Axios.post('/login', {
       method: 'POST',
       headers: {
@@ -34,38 +27,36 @@ const Login = () => {
         password: password.current.value,
       },
     }).then((res) => {
-      // setUserId(res.data);
       if (res.data.loggedIn) {
-        //login success
         setLoggedIn(true);
       } else {
-        //show error
         alert("Email or password doesn' match");
       }
-      // console.log(res.data);
     });
-    //@TODO add promises to check whether the user is genuine or not based on response from server
-    navigate('/loading');
     setTimeout(() => {
-      navigate('/home');
+      navigate('/');
     }, 2000);
   };
+
+  if (loggedIn) {
+    return setTimeout(() => {
+      navigate('/home');
+    }, 500);
+  }
   return (
     <>
-      {/* <div>
-        <Navbar />
-      </div> */}
+      <div className="absolute z-10 ">
+        <Navbar transparent={true} />
+      </div>
       <div className="flex flex-col w-screen h-screen md:h-auto md:flex-row bg-gradient-to-r from-slate-700 to-slate-900 ">
-        <div className="flex-col items-center justify-center hidden w-auto md:flex bg-gradient-to-r from-blue-300 ">
-          <Banner />
-
-          <Tagline />
+        <div className="flex-col items-center justify-center hidden w-auto md:w-5/12 lg:w-1/3 md:flex bg-gradient-to-r from-blue-300 ">
+          {/* <Banner /> */}
+          <div className="pt-10 pl-7 translate-y-1/4">
+            <Tagline />
+          </div>
           <img src={login} alt="" srcSet="" />
         </div>
         <div className="flex flex-col items-center self-center justify-center w-full h-full md:w-1/2 md:pl-20">
-          <div className="fixed flex -top-5 md:hidden">
-            <Banner />
-          </div>
           <h1 className="mt-20 text-2xl font-bold tracking-wider ">
             Login to CineWish
           </h1>
@@ -80,7 +71,7 @@ const Login = () => {
                 Email
               </label>
               <input
-                className="w-full px-3 py-2 text-black bg-gray-100 border-0 border-gray-300 rounded-lg shadow-md outline-0"
+                className="w-full px-3 py-2 text-black bg-gray-100 border-0 border-gray-300 rounded-full shadow-md outline-0"
                 type="email"
                 name="email"
                 ref={email}
@@ -98,7 +89,7 @@ const Login = () => {
                 Password
               </label>
               <input
-                className="w-full px-3 py-2 text-black bg-gray-100 border-0 border-gray-300 rounded-lg shadow-md outline-0 "
+                className="w-full px-3 py-2 text-black bg-gray-100 border-0 border-gray-300 rounded-full shadow-md outline-0 "
                 type="password"
                 name="password"
                 ref={password}
@@ -109,11 +100,9 @@ const Login = () => {
             </div>
 
             <button
-              className="w-full px-5 py-3 my-5 text-black rounded-lg outline-0 lg:w-10/12 bg-gradient-to-t from-cyan-500 to-cyan-100"
+              className="px-5 py-3 my-5 text-black transition-all rounded-full w-36 outline-0 bg-gradient-to-t from-purple-500 to-purple-100 hover:shadow-xl hover:scale-105"
               type="submit"
               onClick={(e) => {
-                e.preventDefault();
-                // validator(e, email.current, password.current);
                 loginValidator(e, email.current, password.current);
               }}
             >
@@ -129,6 +118,7 @@ const Login = () => {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

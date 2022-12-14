@@ -14,7 +14,7 @@ import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import Banner from './Banner';
 import RenderMenuList from './RenderMenuList';
-import { Link, Navigate, redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const menuIcon = <FontAwesomeIcon icon={faBars} />;
 const crossIcon = <FontAwesomeIcon icon={faXmark} />;

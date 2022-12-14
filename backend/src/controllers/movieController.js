@@ -1,34 +1,17 @@
 const prisma = require('../utils/prismaClient');
 const nodemailer = require('nodemailer');
-const api_key = 'api_key=4fa5f43351cf51f47e092aa8911cb098';
+const api_key = process.env.api_key;
 const IMAGE_URL = 'https://image.tmdb.org/t/p/original/';
 const axios = require('axios');
-
-function calculateTime(timePeriod) {
-  timePeriod = timePeriod.toLowerCase();
-  switch (timePeriod) {
-    case 'now':
-      return 0;
-    case '5mins':
-      return 5 * 60 * 1000;
-    case '1hr':
-      return 60 * 60 * 1000;
-    case '12hrs':
-      return 12 * 60 * 60 * 1000;
-    case '24hrs':
-      return 24 * 60 * 60 * 1000;
-    default:
-      return 0;
-  }
-}
+const calculateTime = require('../utils/calculateTime');
 
 const transporter = nodemailer.createTransport({
   service: 'hotmail',
   // port:587,
   // secure:false,
   auth: {
-    user: 'njsaugat@outlook.com',
-    pass: '$Saugat2058',
+    user: 'cinewishes@outlook.com',
+    pass: process.env.MAIL_PASSWORD,
   },
 });
 
@@ -80,7 +63,7 @@ exports.setMovieReminder = async (req, res) => {
 
     await transporter.sendMail({
       to: req.session.user.email,
-      from: 'njsaugat@outlook.com',
+      from: 'cinewishes@outlook.com',
       subject: `Watch '${movie.title}' Now! `,
       html: `
       <div>

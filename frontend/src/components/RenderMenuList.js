@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LoggedInContext } from '../App';
 import ShowPortal from './ShowPortal';
-// import ShowPortal from '../components/ShowPortal';
 
 const RenderMenuList = ({ icons }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -35,9 +34,9 @@ const RenderMenuList = ({ icons }) => {
       <Link to={'/movies-wishlist'} rel="noreferrer" className="list-none">
         {icons && icons[2]} Wishlist
       </Link>
-      <a href="# " rel="noreferrer" className="list-none">
+      {/* <a href="# " rel="noreferrer" className="list-none">
         {icons && icons[1]} About Us
-      </a>
+      </a> */}
       <div
         className="list-none cursor-pointer"
         onClick={(e) => {
@@ -49,10 +48,7 @@ const RenderMenuList = ({ icons }) => {
       {showOptions && (
         <ShowPortal
           showOptions={showOptions}
-          // closeModal={() => setShowOptions(false)}
           setShowOptions={setShowOptions}
-          // setOverflow={setOverflow}
-
           message={'Do you want to log out?'}
           logOut={true}
         />

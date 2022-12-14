@@ -1,7 +1,5 @@
 import React, { useContext, useRef } from 'react';
-import Banner from '../components/Banner';
 import Tagline from '../components/Tagline';
-// import loginHouse from '../loginHouse.png';
 import loginHouse from '../assets/clapperBoard.png';
 
 import Axios from 'axios';

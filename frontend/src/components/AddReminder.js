@@ -71,11 +71,9 @@ const AddReminder = ({ movieId }) => {
   }
   const bellIcon = <FontAwesomeIcon icon={faBell} />;
   const loadingIcon = <FontAwesomeIcon icon={faSpinner} spin size="2x" />;
-  //   const [reminder, setReminder] = useState(false);
 
   const { loggedIn } = useContext(LoggedInContext);
   const navigate = useNavigate();
-  //   const [clima_manha, setClima_Manha] = useState(timeIntervals[0]);
   return (
     <>
       <div className="flex items-end">
@@ -91,7 +89,6 @@ const AddReminder = ({ movieId }) => {
           }}
         >
           <span className={`reminder hidden pr-3`}> Set Reminder</span>
-          {/* Add to Wishlist */}
           <DropDownList
             selected={selected}
             setSelected={setSelected}

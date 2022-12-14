@@ -1,30 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import getMovies from './movies/getMovies';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link, useLocation, useParams } from 'react-router-dom';
-import GetMovie from './movies/GetMovie';
-import Landing from './landingPage/LandingPage';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import { useParams } from 'react-router-dom';
 import DisplayMovies from './DisplayMovies';
+import Loading from './components/Loading';
 
-const searchIcon = <FontAwesomeIcon icon={faMagnifyingGlass} />;
-// function ShowSearchResults({ searchTerm }) {
-//   return (
-//     <div className="text-gray-500 search-results ">
-//       {/* {`Search Results for`}  */}
-//       <span className="tracking-wide text-black">"{searchTerm.toUpperCase()}" </span>
-//     </div>
-//   );
-// }
 export default function ShowMovies() {
+  document.title = 'Movies | CineWish  ';
+
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const { searchTerm } = useParams();
 
-  // const [searchTerm, setSearchTerm] = useState('');
-  // const movieLink = useLocation();
   useEffect(() => {
     (async () => {
       setMovies(await getMovies(searchTerm));
@@ -33,11 +19,7 @@ export default function ShowMovies() {
   }, [searchTerm]);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center w-screen h-screen bg-gradient-to-tr from-slate-400 to-slate-700 ">
-        Loading
-      </div>
-    );
+    return <Loading />;
   }
   console.log(movies);
   return <DisplayMovies movies={movies} searchTerm={`${searchTerm} `} />;

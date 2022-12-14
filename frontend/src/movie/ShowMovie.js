@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import MovieBg from '../components/MovieBg';
+import { useParams } from 'react-router-dom';
 import {
   faStar,
   faAngleDown,
@@ -11,7 +10,6 @@ import Navbar from '../components/Navbar';
 import { getMovie } from '../movies/getMovies';
 import {
   getCast,
-  getImages,
   getRecommendedMovies,
   getReviews,
   getSimilarMovies,
@@ -19,9 +17,10 @@ import {
 } from './getCast';
 import ScrollMovie from '../components/ScrollMovie';
 import YoutubeEmbed from '../components/YoutubeEmbed';
-import NameGenerator from '../components/NameGenerator';
 import Reviews from './Reviews';
 import Footer from '../components/Footer';
+import AddReminder from '../components/AddReminder';
+import Loading from '../components/Loading';
 
 const showMoreIcon = <FontAwesomeIcon icon={faAngleDown} />;
 const shareIcon = <FontAwesomeIcon icon={faArrowUpRightFromSquare} />;
@@ -29,16 +28,14 @@ const IMAGE_URL = 'https://image.tmdb.org/t/p/original/';
 const starIcon = <FontAwesomeIcon icon={faStar} />;
 const TOTAL_TRAILER = 1;
 export default function ShowMovie() {
-  // const movieLink = useLocation();
-  // const movie = movieLink.state;
-  // console.log(movie);
+  document.title = 'CineWish ';
+
   const [movie, setMovie] = useState([{}]);
   const [loading, setLoading] = useState(true);
   const [cast, setCast] = useState([{}]);
   const [similarMovies, setSimilarMovies] = useState([{}]);
   const [recommendedMovies, setRecommendedMovies] = useState([{}]);
   const [reviews, setReviews] = useState([{}]);
-  const [images, setImages] = useState({});
   const [videos, setVideos] = useState([{}]);
   const [showItems, setShowItems] = useState(1);
   const [showMore, setShowMore] = useState(false);
@@ -53,45 +50,14 @@ export default function ShowMovie() {
       setVideos(await getVideos(params.id));
 
       setReviews(await getReviews(params.id));
-      setLoading(false);
       setSimilarMovies(await getSimilarMovies(params.id));
       setRecommendedMovies(await getRecommendedMovies(params.id));
-      setImages(await getImages(params.id));
+      setLoading(false);
     })();
   }, [params.id]);
-  // return (
-  //   <div className="flex items-center justify-center w-screen min-h-screen contain bg-gradient-to-r from-slate-700 to-slate-900">
-  //     {/* <div className="flex flex-col items-center justify-center w-11/12 h-full mt-20 movie-entire lg:flex-row ">
-  //       <div className="flex justify-center w-full h-full m-4 left-image md:w-1/2">
-  //         <img
-  //           src={IMAGE_URL + movie.backdrop_path}
-  //           className="object-cover w-3/5 mb-0 h-3/4"
-  //           alt=""
-  //           srcSet=""
-  //           loading="lazy"
-  //         />
-  //       </div>
-  //       <div className="mx-4 my-2 text-white right-detail md:w-1/2 ">
-  //         <h1 className="mt-2 mb-5 text-5xl font-bold">{movie.title}</h1>
-  //         <div className="text-xl leading-8 overview">{movie.overview}</div>
-  //         <div className="mx-0 my-6 italic release-date">
-  //           {movie.release_date}
-  //         </div>
-  //         <div className="flex items-center justify-center w-12 h-12 text-black bg-yellow-400 rounded-full rating">
-  //           {movie.vote_average}
-  //         </div>
-  //       </div>
-  //     </div> */}
-  //     {/* <MovieBg movie={movie} /> */}
 
-  //   </div>
-  // );
   if (loading) {
-    return (
-      <div className="flex items-center justify-center w-screen h-screen bg-gradient-to-tr from-slate-400 to-slate-700 ">
-        Loading
-      </div>
-    );
+    return <Loading />;
   }
   return (
     <>
@@ -110,7 +76,6 @@ export default function ShowMovie() {
               src={IMAGE_URL + movie.poster_path}
               alt=""
               srcSet=""
-              // className="absolute object-cover mb-4 -translate-x-1/2 -translate-y-1/2 rounded w-44 h-80 left-1/2 top-2/3 md:left-1/4 md:-translate-x-3/4 md:top-1/4 md:translate-y-3/4"
               className="object-cover w-64 transition-all shadow-2xl h-96 rounded-2xl hover:scale-105"
               lazy="loading"
             />
@@ -141,9 +106,10 @@ export default function ShowMovie() {
               </div>
             </div>
             <div className="mt-5">{movie.overview}</div>
-            <div className="mx-0 my-6 italic release-date">
+            <div className="mx-0 mt-6 mb-2 italic release-date">
               {movie.release_date.substring(0, 4)}
             </div>
+            <AddReminder movieId={movie.id} />
           </div>
         </div>
       </div>
@@ -156,7 +122,6 @@ export default function ShowMovie() {
               return (
                 index < 20 && (
                   <div className="w-40 h-72">
-                    {/* <GetMovie movie={movie} /> */}
                     <img
                       src={IMAGE_URL + actor.profile_path}
                       alt=""
@@ -238,17 +203,6 @@ export default function ShowMovie() {
         {similarMovies && <ScrollMovie movies={similarMovies} />}
         <h1 className="mt-10 text-2xl font-bold translate-y-8 ">For YOU</h1>
         {recommendedMovies && <ScrollMovie movies={recommendedMovies} />}
-        {images &&
-          images.backdrops &&
-          images.backdrops.map((image, index) => {
-            return (
-              <div key={image.file_path}>
-                <img src={IMAGE_URL + image.file_path} alt="" srcset="" />
-              </div>
-            );
-          })}
-        {console.log(images)}
-        {console.log(videos)}
       </div>
       <Footer />
     </>
