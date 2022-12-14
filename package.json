@@ -10,18 +10,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@quixo3/prisma-session-store": "^3.1.10",
-    "axios": "^1.2.1",
-    "bcrypt": "^5.1.0",
-    "body-parser": "^1.20.1",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "express-mysql-session": "^2.1.8",
-    "express-session": "^1.17.3",
-    "nodemailer": "^6.8.0"
-  },
-  "devDependencies": {
-    "prisma": "^4.7.1"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
