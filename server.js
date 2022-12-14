@@ -20,6 +20,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, './frontend/build')));
+app.get('*', function (_, res) {
+  res.sendFile(
+    path.join(__dirname, './frontend/build/index.html'),
+    function (err) {
+      res.status(500).send(err);
+    }
+  );
+});
+
 app.use(
   session({
     store: new PrismaSessionStore(new PrismaClient(), {
@@ -33,6 +43,7 @@ app.use(
     // cookie: { secure: true },
   })
 );
+
 app.use('/', router);
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
