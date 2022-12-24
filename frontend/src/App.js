@@ -13,17 +13,43 @@ import './style.css';
 export const LoggedInContext = createContext();
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [moviesWishlistIds, setMoviesWishlistIds] = useState([]);
+  let movieIds = JSON.parse(sessionStorage.getItem('movieIds'));
+
+  const [moviesWishlistIds, setMoviesWishlistIds] = useState(
+    movieIds ? movieIds : []
+  );
   useEffect(() => {
     async function checkAuthenticated() {
+      let isLoggedIn = sessionStorage.getItem('isLoggedIn');
+      let movieIds = sessionStorage.getItem('movieIds');
+      if (isLoggedIn) {
+        setLoggedIn(true);
+        if (movieIds) {
+          setMoviesWishlistIds(movieIds);
+          return;
+        }
+        const results = await fetch('/movies-wishlist');
+        const moviesId = await results.json();
+        console.log(moviesId);
+        setMoviesWishlistIds(moviesId);
+        sessionStorage.setItem('movieIds', moviesId);
+        return;
+      }
+
       const data = await fetch('/isAuthenticated');
       const validation = await data.json();
       if (validation.loggedIn === true) {
         setLoggedIn(true);
+        if (movieIds) {
+          setMoviesWishlistIds(movieIds);
+          return;
+        }
         const results = await fetch('/movies-wishlist');
         const moviesId = await results.json();
-        // console.log(moviesId);
+        console.log(moviesId);
         setMoviesWishlistIds(moviesId);
+        sessionStorage.setItem('movieIds', JSON.stringify(moviesId));
+
         // sessionStorage.setItem('moviesWishlistIds', moviesId);
       }
     }
