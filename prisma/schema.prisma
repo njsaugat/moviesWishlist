@@ -24,13 +24,13 @@ model Movie{
   movieId Int @id
   user   User @relation(fields: [userId], references: [id])
   userId String
-  @@index([movieId])
+  @@index([userId])
 
 }
 
 model Session {
   id        String   @id
   sid       String   @unique
-  data      String
+  data      String 	@db.Text
   expiresAt   DateTime
 }
