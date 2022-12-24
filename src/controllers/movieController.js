@@ -37,13 +37,15 @@ exports.addMovie = async (req, res) => {
 };
 
 exports.getMovieWishlist = async (req, res) => {
+  console.log('reached to wishlist');
   const moviesWishlistId = await prisma.movie.findMany({
     where: {
       userId: req.session.user.id,
     },
   });
-  // console.log();
-  res.send(moviesWishlistId.map((movie) => movie.movieId));
+  console.log(moviesWishlistId);
+  res.json(moviesWishlistId.map((movie) => movie.movieId));
+  // res.json([1, 2, 3, 4, 5, 6, 7]);
 };
 
 exports.setMovieReminder = async (req, res) => {
