@@ -73,6 +73,10 @@ const Home = () => {
 
   useEffect(() => {
     (async () => {
+      // const results = await fetch('/movies-wishlist');
+      // console.log(results);
+      // const moviesId = await results.json();
+      // console.log(moviesId);
       setTrendingMovies(await getTrendingMovies());
       setUpcomingMovies(await getUpcomingMovies());
       setGenres(await getGenres());
