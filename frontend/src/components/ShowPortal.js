@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createPortal } from 'react-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { LoggedInContext } from '../App';
 
 const crossIcon = <FontAwesomeIcon icon={faXmark} />;
 
@@ -15,6 +16,8 @@ const ShowPortal = ({
   logOut,
 }) => {
   const navigate = useNavigate();
+  const { loggedIn, setLoggedIn } = useContext(LoggedInContext);
+
   if (!showOptions) {
     return null;
   }
@@ -71,6 +74,9 @@ const ShowPortal = ({
                 // remove from current listing as well
               }
               if (logOut) {
+                setLoggedIn(false);
+                sessionStorage.removeItem('isLoggedIn');
+                sessionStorage.removeItem('movieIds');
                 console.log(logOut);
                 fetch('/logout', {
                   method: 'POST',
@@ -82,7 +88,7 @@ const ShowPortal = ({
                 setTimeout(() => {
                   navigate('/');
                   window.location.reload(true);
-                }, 2000);
+                }, 1000);
               }
             }}
             className="flex items-center justify-center w-1/2 p-2 tracking-widest cursor-pointer bg-gradient-to-t from-red-600 to-red-400"
