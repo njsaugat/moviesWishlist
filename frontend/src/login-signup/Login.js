@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import Tagline from '../components/Tagline';
 import login from '../assets/clapperBoard.png';
 
@@ -8,16 +8,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import { LoggedInContext } from '../App';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 const Login = () => {
   const navigate = useNavigate();
   document.title = 'CineWish | Login';
   const email = useRef(null);
   const password = useRef(null);
-  const { loggedIn, setLoggedIn } = useContext(LoggedInContext);
+  const { loggedIn, setLoggedIn, setMoviesWishlistIds } =
+    useContext(LoggedInContext);
+  const [loading, setLoading] = useState(false);
+  const loadingIcon = <FontAwesomeIcon icon={faSpinner} spin size="2x" />;
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    Axios.post('/login', {
+    setLoading(true);
+    const res = await Axios.post('/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'mutlipart/form-data',
@@ -26,21 +32,39 @@ const Login = () => {
         email: email.current.value,
         password: password.current.value,
       },
-    }).then((res) => {
-      if (res.data.loggedIn) {
-        setLoggedIn(true);
-      } else {
-        alert("Email or password doesn' match");
-      }
     });
-    setTimeout(() => {
-      navigate('/');
-    }, 2000);
+    // .then((res) => {
+
+    if (res.data.loggedIn) {
+      setLoggedIn(true);
+      setLoading(false);
+      sessionStorage.setItem('isLoggedIn', true);
+      // fetch('/movies-wishlist')
+      //   .then((results) => results.json())
+      //   .then((moviesId) => {
+      //     setMoviesWishlistIds(moviesId);
+      //     sessionStorage.setItem('movieIds', JSON.stringify(moviesId));
+      //   });
+      const results = await fetch('/movies-wishlist');
+      const moviesId = await results.json();
+      console.log(moviesId);
+      setMoviesWishlistIds(moviesId);
+      sessionStorage.setItem('movieIds', JSON.stringify(moviesId));
+
+      // localStorage.setItem('isLoggedIn', true);
+    } else {
+      alert("Email or password doesn' match");
+    }
+    // });
+    // setTimeout(() => {
+    //   navigate('/');
+    //   window.location.reload(false);
+    // }, 2000);
   };
 
   if (loggedIn) {
     return setTimeout(() => {
-      navigate('/home');
+      navigate('/');
     }, 500);
   }
   return (
@@ -108,6 +132,10 @@ const Login = () => {
             >
               Sign In
             </button>
+            <span className={loading ? 'visible' : 'invisible'}>
+              {loadingIcon}
+            </span>
+
             <p className="mt-4">
               Not a member?
               <Link to={'/signup'} className="font-bold ">
