@@ -28,7 +28,7 @@ function App() {
           setMoviesWishlistIds(movieIds);
           return;
         }
-        const results = await fetch('/movies-wishlist');
+        const results = await fetch('/api/movies-wishlist-ids');
         const moviesId = await results.json();
         console.log(moviesId);
         setMoviesWishlistIds(moviesId);
@@ -36,7 +36,7 @@ function App() {
         return;
       }
 
-      const data = await fetch('/isAuthenticated');
+      const data = await fetch('/api/isAuthenticated');
       const validation = await data.json();
       if (validation.loggedIn === true) {
         setLoggedIn(true);
@@ -44,7 +44,7 @@ function App() {
           setMoviesWishlistIds(movieIds);
           return;
         }
-        const results = await fetch('/movies-wishlist');
+        const results = await fetch('/api/movies-wishlist-ids');
         const moviesId = await results.json();
         console.log(moviesId);
         setMoviesWishlistIds(moviesId);
@@ -72,9 +72,9 @@ function App() {
           <Route path="/home" element={<Home />} />;
           <Route path="/movie/:id" element={<ShowMovie />} />;
           <Route path="/movies-wishlist" element={<MoviesWishlist />} />
-          <Route path="movies/search/:searchTerm" element={<ShowMovies />} />;
+          <Route path="/movies/search/:searchTerm" element={<ShowMovies />} />;
           <Route
-            path="movies/genre/:genreName/:id"
+            path="/movies/genre/:genreName/:id"
             element={<MoviesGenres />}
           />
           ;
