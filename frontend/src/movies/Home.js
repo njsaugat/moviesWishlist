@@ -73,7 +73,7 @@ const Home = () => {
 
   useEffect(() => {
     (async () => {
-      // const results = await fetch('/movies-wishlist');
+      // const results = await fetch('/api/movies-wishlist-ids');
       // console.log(results);
       // const moviesId = await results.json();
       // console.log(moviesId);
