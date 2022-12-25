@@ -10,20 +10,49 @@ const MoviesWishlist = () => {
   document.title = 'Wishlist | CineWish ';
   const randomIcon = <FontAwesomeIcon icon={faShuffle} />;
 
-  const { moviesWishlistIds } = useContext(LoggedInContext);
-  console.log(moviesWishlistIds);
+  let { moviesWishlistIds, setMoviesWishlistIds } = useContext(LoggedInContext);
+
   let randomId =
+    moviesWishlistIds &&
     moviesWishlistIds[
-      Math.ceil(Math.random() * (moviesWishlistIds.length - 1))
+      Math.ceil(
+        Math.random() * (moviesWishlistIds ? moviesWishlistIds.length - 1 : 20)
+      )
     ];
   console.log(randomId);
   console.log('');
   const [moviesWishlist, setMoviesWishlist] = useState([{}]);
   const [loading, setLoading] = useState(true);
   const [randomMovie, setRandomMovie] = useState([]);
+  // const [moviesWishlistId, setMoviesWishlistId] = useState(
+  //   moviesWishlistIds ? moviesWishlistIds : []
+  // );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // useEffect(() => {
+  //   async function getIds() {
+  //     const results = await fetch('/api/movies-wishlist-ids', {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Accept: 'application/json',
+  //       },
+  //     });
+  //     console.log(results);
+  //     const moviesId = await results.json();
+  //     console.log(moviesId);
+  //     setMoviesWishlistIds(moviesId);
+  //     sessionStorage.setItem('movieIds', JSON.stringify(moviesId));
+  //     // moviesWishlistIds = moviesWishlistIds ? moviesWishIds : moviesWishlistIds;
+  //   }
+  //   // console.log(typeof moviesWishlistIds);
+  //   if (!moviesWishlistIds) {
+  //     getIds();
+  //     console.log('getIds ');
+  //     // let moviesWishIds = JSON.parse(sessionStorage.getItem('movieIds'));
+  //     // setMoviesWishlistIds(moviesWishIds);
+  //   }
 
+  //   return () => setMoviesWishlistIds([]);
+  // }, [moviesWishlistIds, setMoviesWishlistIds]);
   useEffect(() => {
     (async () => {
       if (moviesWishlistIds.length > 0) {
@@ -34,7 +63,7 @@ const MoviesWishlist = () => {
         setLoading(false);
       }
     })();
-    return () => setMoviesWishlist([{}]);
+    // return () => setMoviesWishlist([{}]);
   }, [moviesWishlistIds]);
   if (loading) {
     return <Loading />;

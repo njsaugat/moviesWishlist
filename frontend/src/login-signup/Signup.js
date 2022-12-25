@@ -31,7 +31,7 @@ const Signup = () => {
     console.log(firstname.current.value);
     console.log(email.current.value);
 
-    Axios.post('/user', {
+    Axios.post('/api/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'mutlipart/form-data',

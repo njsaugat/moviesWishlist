@@ -32,8 +32,8 @@ const MovieBg = ({ movie, id, index, picturePointer, ShowIcons }) => {
             {movie.overview.substring(0, DESCRIPTION_MAX_LENGTH) + '...'}
           </span>
         </div>
-        {ShowIcons}
       </Link>
+      {ShowIcons}
       {
         <div
           className={` ${

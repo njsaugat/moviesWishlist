@@ -11,7 +11,11 @@ exports.postLoginInfo = async (req, res) => {
   const passwordMatch = await bcrypt.compare(password, user.password);
   console.log(user);
   if (passwordMatch) {
-    req.session.user = user;
+    req.session.user = {
+      id: user.id,
+      email: user.email,
+      firstname: user.firstname,
+    };
     req.session.isLoggedIn = true;
     console.log(req.session);
     res.send({ loggedIn: true });

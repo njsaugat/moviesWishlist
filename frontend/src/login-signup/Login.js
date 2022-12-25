@@ -23,7 +23,7 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const res = await Axios.post('/login', {
+    const res = await Axios.post('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'mutlipart/form-data',
@@ -45,7 +45,9 @@ const Login = () => {
       //     setMoviesWishlistIds(moviesId);
       //     sessionStorage.setItem('movieIds', JSON.stringify(moviesId));
       //   });
-      const results = await fetch('/movies-wishlist');
+      console.log('reached here');
+      const results = await Axios.get('/api/movies-wishlist-ids');
+      console.log(results);
       const moviesId = await results.json();
       console.log(moviesId);
       setMoviesWishlistIds(moviesId);

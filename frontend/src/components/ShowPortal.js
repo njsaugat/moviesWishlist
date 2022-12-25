@@ -78,7 +78,7 @@ const ShowPortal = ({
                 sessionStorage.removeItem('isLoggedIn');
                 sessionStorage.removeItem('movieIds');
                 console.log(logOut);
-                fetch('/logout', {
+                fetch('/api/logout', {
                   method: 'POST',
                 }).then((res) => {
                   // res.json();

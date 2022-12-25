@@ -49,7 +49,7 @@ const AddReminder = ({ movieId }) => {
 
   function setReminder(movieId) {
     axios
-      .post('/movie-reminder', {
+      .post('/api/movie-reminder', {
         method: 'POST',
         headers: {
           'Content-Type': 'mutlipart/form-data',

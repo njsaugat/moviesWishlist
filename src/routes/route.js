@@ -17,7 +17,7 @@ router.post('/add-movie', addMovie);
 
 router.get('/user/:id', getUser);
 
-router.get('/movies-wishlist', getMovieWishlist);
+router.get('/movies-wishlist-ids', getMovieWishlist);
 
 router.post('/movie-reminder', setMovieReminder);
 
